@@ -1,10 +1,18 @@
 package com.desmond.androidtoolbardemo;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ToolBarActivity extends AppCompatActivity {
@@ -20,6 +28,8 @@ public class ToolBarActivity extends AppCompatActivity {
 
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
+
+        setupToolbarSpinner();
     }
 
     @Override
@@ -57,5 +67,34 @@ public class ToolBarActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setupToolbarSpinner() {
+        View spinnerContainer = LayoutInflater.from(this)
+                .inflate(R.layout.toolbar_spinner, mToolBar, false);
+
+        ActionBar.LayoutParams lp = new ActionBar.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mToolBar.addView(spinnerContainer, lp);
+
+        SpinnerAdapter spinnerAdapter = new SpinnerAdapter();
+        spinnerAdapter.addItems(getSpinnerData());
+
+        Spinner spinner = (Spinner) spinnerContainer.findViewById(R.id.toolbar_spinner);
+        spinner.setAdapter(spinnerAdapter);
+    }
+
+    private List<String> getSpinnerData() {
+        List<String> list = new ArrayList<>();
+        list.add("Test 1");
+        list.add("Test 2");
+        list.add("Test 3");
+        list.add("Test 4");
+        list.add("Test 5");
+        list.add("Test 6");
+        list.add("Test 7");
+        list.add("Test 8");
+        list.add("Test 9");
+        return list;
     }
 }
