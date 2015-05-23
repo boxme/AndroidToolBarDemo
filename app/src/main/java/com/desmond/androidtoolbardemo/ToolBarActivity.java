@@ -1,25 +1,46 @@
 package com.desmond.androidtoolbardemo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 
-public class MainActivity extends AppCompatActivity {
+public class ToolBarActivity extends AppCompatActivity {
+
+    public static final String TAG = ToolBarActivity.class.getSimpleName();
+
+    private Toolbar mToolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_tool_bar);
+
+        mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolBar);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        /*
+         * With a toolbar, we have to set the title text after
+         * onCreate(), or the default label will overwrite our
+         * settings.
+         */
+        //Set the title text
+        mToolBar.setTitle("Toolbar");
+        //Set the subtitle text
+        mToolBar.setSubtitle("Toolbar with Spinner");
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_tool_bar, menu);
         return true;
     }
 
@@ -36,10 +57,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void launchToolbarActivity(View view) {
-        Intent toolbarActivityIntent = new Intent(this, ToolBarActivity.class);
-        startActivity(toolbarActivityIntent);
     }
 }

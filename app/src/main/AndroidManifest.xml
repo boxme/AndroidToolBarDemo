@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ToolBarActivity"
+            android:label="@string/title_activity_tool_bar"
+            android:theme="@style/ToolBarAppTheme">
+        </activity>
     </application>
 
 </manifest>
