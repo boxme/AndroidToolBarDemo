@@ -3,6 +3,8 @@ package com.desmond.androidtoolbardemo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,6 +32,7 @@ public class ToolBarActivity extends AppCompatActivity {
         setSupportActionBar(mToolBar);
 
         setupToolbarSpinner();
+        setupRecyclerView();
     }
 
     @Override
@@ -84,6 +87,14 @@ public class ToolBarActivity extends AppCompatActivity {
         spinner.setAdapter(spinnerAdapter);
     }
 
+    private void setupRecyclerView() {
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerAdapter recyclerAdapter = new RecyclerAdapter();
+        recyclerAdapter.addItems(createItemList());
+        recyclerView.setAdapter(recyclerAdapter);
+    }
+
     private List<String> getSpinnerData() {
         List<String> list = new ArrayList<>();
         list.add("Test 1");
@@ -95,6 +106,30 @@ public class ToolBarActivity extends AppCompatActivity {
         list.add("Test 7");
         list.add("Test 8");
         list.add("Test 9");
+        return list;
+    }
+
+    private List<String> createItemList() {
+        List<String> list = new ArrayList<>();
+        list.add("Test 1");
+        list.add("Test 2");
+        list.add("Test 3");
+        list.add("Test 4");
+        list.add("Test 5");
+        list.add("Test 6");
+        list.add("Test 7");
+        list.add("Test 8");
+        list.add("Test 9");
+        list.add("Test 10");
+        list.add("Test 11");
+        list.add("Test 12");
+        list.add("Test 13");
+        list.add("Test 14");
+        list.add("Test 15");
+        list.add("Test 16");
+        list.add("Test 17");
+        list.add("Test 18");
+        list.add("Test 19");
         return list;
     }
 }
