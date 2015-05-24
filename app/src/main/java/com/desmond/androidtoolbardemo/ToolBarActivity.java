@@ -1,6 +1,7 @@
 package com.desmond.androidtoolbardemo;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -88,11 +91,58 @@ public class ToolBarActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecyclerAdapter recyclerAdapter = new RecyclerAdapter();
         recyclerAdapter.addItems(createItemList());
         recyclerView.setAdapter(recyclerAdapter);
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            private static final int HIDE_THRESHOLD = 20;
+            private int mScrolledDist = 0;
+            private boolean mControlsVisible = true;
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int firstVisibleItem =
+                        ((LinearLayoutManager) recyclerView.getLayoutManager())
+                                .findFirstVisibleItemPosition();
+
+                // show views if first item is first visible position and views are hidden
+                if (firstVisibleItem == 0) {
+                    if (!mControlsVisible) {
+                        onShow();
+                        mControlsVisible = true;
+                    }
+                } else {
+                    if (mScrolledDist > HIDE_THRESHOLD && mControlsVisible) {
+                        onHide();
+                        mControlsVisible = false;
+                        mScrolledDist = 0;
+                    } else if (mScrolledDist < -HIDE_THRESHOLD && !mControlsVisible) {
+                        onShow();
+                        mControlsVisible = true;
+                        mScrolledDist = 0;
+                    }
+                }
+
+                // Scrolling down and views are visible OR Scrolling up and views are hidden
+                if ((mControlsVisible && dy > 0) || (!mControlsVisible && dy < 0)) {
+                    mScrolledDist += dy;
+                }
+            }
+
+            private void onHide() {
+                hideViews();
+            }
+
+            private void onShow() {
+                showViews();
+            }
+        });
     }
 
     private List<String> getSpinnerData() {
@@ -111,25 +161,40 @@ public class ToolBarActivity extends AppCompatActivity {
 
     private List<String> createItemList() {
         List<String> list = new ArrayList<>();
-        list.add("Test 1");
-        list.add("Test 2");
-        list.add("Test 3");
-        list.add("Test 4");
-        list.add("Test 5");
-        list.add("Test 6");
-        list.add("Test 7");
-        list.add("Test 8");
-        list.add("Test 9");
-        list.add("Test 10");
-        list.add("Test 11");
-        list.add("Test 12");
-        list.add("Test 13");
-        list.add("Test 14");
-        list.add("Test 15");
-        list.add("Test 16");
-        list.add("Test 17");
-        list.add("Test 18");
-        list.add("Test 19");
+        list.add("Item 1");
+        list.add("Item 2");
+        list.add("Item 3");
+        list.add("Item 4");
+        list.add("Item 5");
+        list.add("Item 6");
+        list.add("Item 7");
+        list.add("Item 8");
+        list.add("Item 9");
+        list.add("Item 10");
+        list.add("Item 11");
+        list.add("Item 12");
+        list.add("Item 13");
+        list.add("Item 14");
+        list.add("Item 15");
+        list.add("Item 16");
+        list.add("Item 17");
+        list.add("Item 18");
+        list.add("Item 19");
         return list;
+    }
+
+    private void hideViews() {
+        ViewCompat.animate(mToolBar).translationY(-mToolBar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+
+        // Take margins into account when we are hiding views, otherwise FAB would’t fully hide.
+//        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mFabButton.getLayoutParams();
+//        int fabBottomMargin = lp.bottomMargin;
+//        mFabButton.animate().translationY(mFabButton.getHeight()+fabBottomMargin)
+//                .setInterpolator(new AccelerateInterpolator(2)).start();
+    }
+
+    private void showViews() {
+        ViewCompat.animate(mToolBar).translationY(0).setInterpolator(new DecelerateInterpolator(2));
+//        ViewCompat.animate(mFabButton).translationY(0).setInterpolator(new DecelerateInterpolator(2));
     }
 }
