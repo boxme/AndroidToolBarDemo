@@ -3,4 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="toolbar_spinner_item_width">200dp</dimen>
+    <dimen name="tabsHeight">50dp</dimen>
 </resources>

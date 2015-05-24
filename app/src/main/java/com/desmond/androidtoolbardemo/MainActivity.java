@@ -42,4 +42,9 @@ public class MainActivity extends AppCompatActivity {
         Intent toolbarActivityIntent = new Intent(this, ToolBarActivity.class);
         startActivity(toolbarActivityIntent);
     }
+
+    public void launchToolbarHideOnScrollActivity(View view) {
+        Intent toolbarActivityIntent = new Intent(this, HideOnScrollToolBarActivity.class);
+        startActivity(toolbarActivityIntent);
+    }
 }

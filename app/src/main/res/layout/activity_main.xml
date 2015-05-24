@@ -1,15 +1,24 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:gravity="center"
     android:layout_height="match_parent" tools:context=".MainActivity">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_activity_tool_bar"
-        android:layout_centerInParent="true"
         android:padding="10dp"
         android:textAllCaps="false"
         android:onClick="launchToolbarActivity"/>
 
-</RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_activity_hide_on_scroll_tool_bar"
+        android:padding="10dp"
+        android:textAllCaps="false"
+        android:onClick="launchToolbarHideOnScrollActivity"/>
+
+</LinearLayout>
