@@ -1,4 +1,4 @@
-package com.desmond.androidtoolbardemo;
+package com.desmond.androidtoolbardemo.hideToolbarOnScroll;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.desmond.androidtoolbardemo.R;
+import com.desmond.androidtoolbardemo.RecyclerAdapter;
+import com.desmond.androidtoolbardemo.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

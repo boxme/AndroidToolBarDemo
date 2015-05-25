@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.desmond.androidtoolbardemo.hideToolbarOnScroll.HideOnScrollToolBarActivity;
+import com.desmond.androidtoolbardemo.toolbarWithSpinner.ToolBarActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 

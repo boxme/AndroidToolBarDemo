@@ -17,12 +17,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ToolBarActivity"
+            android:name=".toolbarWithSpinner.ToolBarActivity"
             android:label="@string/title_activity_tool_bar"
             android:theme="@style/ToolBarAppTheme" >
         </activity>
         <activity
-            android:name=".HideOnScrollToolBarActivity"
+            android:name=".hideToolbarOnScroll.HideOnScrollToolBarActivity"
             android:label="@string/title_activity_hide_on_scroll_tool_bar"
             android:theme="@style/ToolBarAppTheme">
         </activity>

@@ -1,4 +1,4 @@
-package com.desmond.androidtoolbardemo;
+package com.desmond.androidtoolbardemo.toolbarWithSpinner;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
@@ -15,6 +15,10 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Spinner;
+
+import com.desmond.androidtoolbardemo.R;
+import com.desmond.androidtoolbardemo.RecyclerAdapter;
+import com.desmond.androidtoolbardemo.SpinnerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

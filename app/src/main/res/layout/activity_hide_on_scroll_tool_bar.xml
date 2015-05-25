@@ -4,19 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/darker_gray"
-    tools:context="com.desmond.androidtoolbardemo.HideOnScrollToolBarActivity">
+    tools:context="com.desmond.androidtoolbardemo.hideToolbarOnScroll.HideOnScrollToolBarActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/toolbarContainer"
         android:layout_width="match_parent"
-        android:minHeight="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?attr/colorPrimary">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:minHeight="?attr/actionBarSize"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+        <com.desmond.androidtoolbardemo.slidingTab.SlidingTabLayout
+            android:id="@+id/viewpager_sliding_tab"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tabsHeight"
+            app:shouldExpand="true"
+            app:indicatorColor="@android:color/white"
+            app:tabBackground="@layout/sliding_tab_view"
+            app:tabBackgroundTextViewId="@id/tab_textview"/>
+
+    </LinearLayout>
 
 </FrameLayout>
