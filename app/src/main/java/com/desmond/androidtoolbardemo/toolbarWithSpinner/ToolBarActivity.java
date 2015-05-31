@@ -119,16 +119,13 @@ public class ToolBarActivity extends AppCompatActivity {
                 if (firstVisibleItem == 0) {
                     if (!mControlsVisible) {
                         onShow();
-                        mControlsVisible = true;
                     }
                 } else {
                     if (mScrolledDist > HIDE_THRESHOLD && mControlsVisible) {
                         onHide();
-                        mControlsVisible = false;
                         mScrolledDist = 0;
                     } else if (mScrolledDist < -HIDE_THRESHOLD && !mControlsVisible) {
                         onShow();
-                        mControlsVisible = true;
                         mScrolledDist = 0;
                     }
                 }
@@ -141,10 +138,12 @@ public class ToolBarActivity extends AppCompatActivity {
 
             private void onHide() {
                 hideViews();
+                mControlsVisible = false;
             }
 
             private void onShow() {
                 showViews();
+                mControlsVisible = true;
             }
         });
     }

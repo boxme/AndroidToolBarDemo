@@ -32,7 +32,7 @@
             app:shouldExpand="true"
             app:indicatorColor="@android:color/white"
             app:tabBackground="@layout/sliding_tab_view"
-            app:tabBackgroundTextViewId="@id/tab_textview"/>
+            app:tabBackgroundTextViewId="@+id/tab_textview"/>
 
     </LinearLayout>
 

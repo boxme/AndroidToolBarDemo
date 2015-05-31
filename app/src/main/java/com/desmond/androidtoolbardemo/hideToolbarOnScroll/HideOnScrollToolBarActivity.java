@@ -1,12 +1,16 @@
 package com.desmond.androidtoolbardemo.hideToolbarOnScroll;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 
 import com.desmond.androidtoolbardemo.R;
 import com.desmond.androidtoolbardemo.RecyclerAdapter;
@@ -21,6 +25,7 @@ public class HideOnScrollToolBarActivity extends AppCompatActivity {
     public static final String TAG = HideOnScrollToolBarActivity.class.getSimpleName();
 
     private Toolbar mToolBar;
+    private View mToolBarContainer;
     private int mToolBarOffset = 0;
     private int mToolBarHeight;
 
@@ -33,6 +38,8 @@ public class HideOnScrollToolBarActivity extends AppCompatActivity {
 
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
+
+        mToolBarContainer = findViewById(R.id.toolbarContainer);
 
         setupRecyclerView();
     }
@@ -83,6 +90,39 @@ public class HideOnScrollToolBarActivity extends AppCompatActivity {
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
+            private static final float HIDE_THRESHOLD = 10;
+            private static final float SHOW_THRESHOLD = 70;
+
+            private boolean mControlsVisible = true;
+            private int mTotalScrolledDistance;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                // No longer scrolling
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    if (mTotalScrolledDistance < mToolBarHeight) {
+                        onShow();
+                    } else {
+                        // Previously visible
+                        if (mControlsVisible) {
+                            if (mToolBarOffset > HIDE_THRESHOLD) {
+                                onHide();
+                            } else {
+                                onShow();
+                            }
+                        } else {
+                            if (mToolBarHeight - mToolBarOffset > SHOW_THRESHOLD) {
+                                onShow();
+                            } else {
+                                onHide();
+                            }
+                        }
+                    }
+                }
+            }
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -94,6 +134,8 @@ public class HideOnScrollToolBarActivity extends AppCompatActivity {
                 if ((mToolBarOffset < mToolBarHeight && dy > 0) || (mToolBarOffset > 0 && dy < 0)) {
                     mToolBarOffset += dy;
                 }
+
+                mTotalScrolledDistance += dy;
             }
 
             private void clipToolBarOffset() {
@@ -105,7 +147,21 @@ public class HideOnScrollToolBarActivity extends AppCompatActivity {
             }
 
             private void onMoved(int distance) {
-                mToolBar.setTranslationY(-distance);
+                mToolBarContainer.setTranslationY(-distance);
+            }
+
+            private void onShow() {
+                ViewCompat.animate(mToolBarContainer)
+                        .translationY(0)
+                        .setInterpolator(new DecelerateInterpolator(2));
+                mControlsVisible = true;
+            }
+
+            private void onHide() {
+                ViewCompat.animate(mToolBarContainer)
+                        .translationY(-mToolBarHeight)
+                        .setInterpolator(new AccelerateInterpolator(2));
+                mControlsVisible = false;
             }
         });
     }
