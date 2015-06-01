@@ -24,6 +24,11 @@
         <activity
             android:name=".hideToolbarOnScroll.HideOnScrollToolBarActivity"
             android:label="@string/title_activity_hide_on_scroll_tool_bar"
+            android:theme="@style/ToolBarAppTheme" >
+        </activity>
+        <activity
+            android:name=".googlePlayScrollingToolBar.GooglePlayToolBarActivity"
+            android:label="@string/title_activity_google_play_tool_bar"
             android:theme="@style/ToolBarAppTheme">
         </activity>
     </application>

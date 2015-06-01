@@ -39,7 +39,7 @@ public class HideOnScrollToolBarActivity extends AppCompatActivity {
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
 
-        mToolBarContainer = findViewById(R.id.toolbarContainer);
+        mToolBarContainer = findViewById(R.id.toolbar_container);
 
         setupRecyclerView();
     }
@@ -103,20 +103,20 @@ public class HideOnScrollToolBarActivity extends AppCompatActivity {
                 // No longer scrolling
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     if (mTotalScrolledDistance < mToolBarHeight) {
-                        onShow();
+                        showToolbar();
                     } else {
                         // Previously visible
                         if (mControlsVisible) {
                             if (mToolBarOffset > HIDE_THRESHOLD) {
-                                onHide();
+                                hideToolbar();
                             } else {
-                                onShow();
+                                showToolbar();
                             }
                         } else {
                             if (mToolBarHeight - mToolBarOffset > SHOW_THRESHOLD) {
-                                onShow();
+                                showToolbar();
                             } else {
-                                onHide();
+                                hideToolbar();
                             }
                         }
                     }
@@ -150,14 +150,14 @@ public class HideOnScrollToolBarActivity extends AppCompatActivity {
                 mToolBarContainer.setTranslationY(-distance);
             }
 
-            private void onShow() {
+            private void showToolbar() {
                 ViewCompat.animate(mToolBarContainer)
                         .translationY(0)
                         .setInterpolator(new DecelerateInterpolator(2));
                 mControlsVisible = true;
             }
 
-            private void onHide() {
+            private void hideToolbar() {
                 ViewCompat.animate(mToolBarContainer)
                         .translationY(-mToolBarHeight)
                         .setInterpolator(new AccelerateInterpolator(2));
@@ -168,25 +168,9 @@ public class HideOnScrollToolBarActivity extends AppCompatActivity {
 
     private List<String> createItemList() {
         List<String> list = new ArrayList<>();
-        list.add("Item 1");
-        list.add("Item 2");
-        list.add("Item 3");
-        list.add("Item 4");
-        list.add("Item 5");
-        list.add("Item 6");
-        list.add("Item 7");
-        list.add("Item 8");
-        list.add("Item 9");
-        list.add("Item 10");
-        list.add("Item 11");
-        list.add("Item 12");
-        list.add("Item 13");
-        list.add("Item 14");
-        list.add("Item 15");
-        list.add("Item 16");
-        list.add("Item 17");
-        list.add("Item 18");
-        list.add("Item 19");
+        for (int i = 0; i < 20; i++) {
+            list.add("Item " + i);
+        }
         return list;
     }
 }

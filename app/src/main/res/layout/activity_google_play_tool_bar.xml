@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
-    tools:context="com.desmond.androidtoolbardemo.hideToolbarOnScroll.HideOnScrollToolBarActivity">
+    tools:context="com.desmond.androidtoolbardemo.googlePlayScrollingToolBar.GooglePlayToolBarActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <View
+        android:id="@+id/colored_bg_view"
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        android:background="?attr/colorPrimary"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -20,9 +25,10 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
         <com.desmond.androidtoolbardemo.slidingTab.SlidingTabLayout
@@ -33,7 +39,5 @@
             app:indicatorColor="@android:color/white"
             app:tabBackground="@layout/sliding_tab_view"
             app:tabBackgroundTextViewId="@+id/tab_textview"/>
-
     </LinearLayout>
-
 </FrameLayout>
